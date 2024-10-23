@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weryfikacja Kodu</title>
+    <style>
+        body {
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        input[type="text"] {
+            width: 100px;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            border: 2px solid #cccccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #28a745;
+        }
+
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wprowadź 4-cyfrowy kod</h1>
+        <input type="text" id="codeInput" maxlength="4" placeholder="XXXX">
+        <br>
+        <button onclick="checkCode()">Sprawdź Kod</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        const correctCode = "1234"; // Poprawny kod
+
+        function checkCode() {
+            const userCode = document.getElementById('codeInput').value;
+            const resultDiv = document.getElementById('result');
+
+            if (userCode === correctCode) {
+                resultDiv.textContent = "Poprawny kod!";
+                resultDiv.className = "result success";
+            } else {
+                resultDiv.textContent = "Błędny kod!";
+                resultDiv.className = "result error";
+            }
+        }
+    </script>
+</body>
+</html>
