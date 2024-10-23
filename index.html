@@ -1,94 +1,112 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weryfikacja Kodu</title>
+    <title>Code Verification</title>
     <style>
+        /* Global Styles */
         body {
-            background-color: #f0f4f8;
+            background-color: #121212; /* Dark background */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
             font-family: Arial, sans-serif;
+            color: #ffffff; /* Light text color */
         }
 
         .container {
-            background-color: #ffffff;
+            background-color: #1e1e1e; /* Slightly lighter dark for the container */
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
             text-align: center;
+            width: 300px;
         }
 
         h1 {
             margin-bottom: 20px;
-            color: #333333;
+            color: #ffffff;
+            font-size: 24px;
         }
 
         input[type="text"] {
-            width: 100px;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
             font-size: 18px;
             text-align: center;
-            border: 2px solid #cccccc;
+            border: 2px solid #444444; /* Neutral border color */
             border-radius: 5px;
             margin-bottom: 20px;
+            background-color: #2c2c2c; /* Dark input background */
+            color: #ffffff; /* Light text color */
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]::placeholder {
+            color: #bbbbbb; /* Lighter placeholder text */
         }
 
         button {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px;
             font-size: 16px;
             border: none;
             border-radius: 5px;
-            background-color: #007BFF;
+            background-color: #6200ee; /* Vibrant button color */
             color: #ffffff;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #3700b3; /* Darker shade on hover */
         }
 
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
+        /* Validation States */
         .success {
-            color: #28a745;
+            border-color: #28a745 !important; /* Green border for success */
         }
 
         .error {
-            color: #dc3545;
+            border-color: #dc3545 !important; /* Red border for error */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Wprowadź 4-cyfrowy kod</h1>
+        <h1>Enter Code</h1>
         <input type="text" id="codeInput" maxlength="4" placeholder="XXXX">
-        <br>
-        <button onclick="checkCode()">Sprawdź Kod</button>
-        <div id="result" class="result"></div>
+        <button onclick="checkCode()">Verify Code</button>
     </div>
 
     <script>
-        const correctCode = "1234"; // Poprawny kod
+        const correctCode = "1234"; // Correct code
 
         function checkCode() {
             const userCode = document.getElementById('codeInput').value;
-            const resultDiv = document.getElementById('result');
+            const codeInput = document.getElementById('codeInput');
+
+            // Regular expression to ensure exactly 4 digits
+            const codePattern = /^\d{4}$/;
+
+            if (!codePattern.test(userCode)) {
+                // If input is not exactly 4 digits, reset border color
+                codeInput.classList.remove('success', 'error');
+                return;
+            }
 
             if (userCode === correctCode) {
-                resultDiv.textContent = "Poprawny kod!";
-                resultDiv.className = "result success";
+                // Correct code: green border
+                codeInput.classList.add('success');
+                codeInput.classList.remove('error');
             } else {
-                resultDiv.textContent = "Błędny kod!";
-                resultDiv.className = "result error";
+                // Incorrect code: red border
+                codeInput.classList.add('error');
+                codeInput.classList.remove('success');
             }
         }
     </script>
